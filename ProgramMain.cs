@@ -11,13 +11,15 @@ namespace SFML_sample
 {
     class ProgramMain
     {
-        enum escenas { Menu, Juego }
+        enum Escenas { Menu, Juego }
         static void Main() 
         {
             const uint width =800;
             const uint heigth = 600;
             const string windowTitle = "Test";
 
+            Escenas escena = Escenas.Menu;
+            MenuJuego menuJuego=new MenuJuego();
             VideoMode videoMode = new VideoMode(800,600);
             Clock clock = new Clock();
 
@@ -47,17 +49,19 @@ namespace SFML_sample
                 //Verificamos si se triggereo algun evento
                 win.DispatchEvents();
 
-                switch (escenas) 
+                switch (escena) 
                 {
-                    case escenas.Menu:
+                    case Escenas.Menu:
+                        win.Draw((Drawable)menuJuego.Texto);
                         break;
-                    case escenas.Juego:
+                    case Escenas.Juego:
+                        win.Draw(circulo);
+                        win.Draw(rectangulo);
                         break;
                 }
                 //INPUT
-                win.Clear(Color.Black);
-                win.Draw(circulo);
-                win.Draw(rectangulo);
+                //win.Clear(Color.Black);
+               
                 win.Display();
             } 
             
