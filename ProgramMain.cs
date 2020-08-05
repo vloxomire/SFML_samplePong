@@ -12,30 +12,22 @@ namespace SFML_sample
     class ProgramMain
     {
         enum Escenas { Menu, Juego }
-        static void Main() 
+        static void Main()
         {
-            const uint width =800;
+            const uint width = 800;
             const uint heigth = 600;
             const string windowTitle = "Test";
 
-            Escenas escena = Escenas.Menu;
-            MenuJuego menuJuego=new MenuJuego();
-            VideoMode videoMode = new VideoMode(800,600);
+            Escenas escena = Escenas.Juego;
+
+            MenuJuego menuJuego = new MenuJuego();
+            Figuras figura = new Figuras();
             Clock clock = new Clock();
 
             //Creamos la  ventana,pasando el videomode y el titulo
-            RenderWindow win = new RenderWindow(videoMode,windowTitle);
+            VideoMode videoMode = new VideoMode(width, heigth);
+            RenderWindow win = new RenderWindow(videoMode, windowTitle);
             win.SetFramerateLimit(60);
-
-            //Creamos una figura
-            CircleShape circulo = new CircleShape(50);
-            circulo.FillColor=Color.Red;
-            circulo.Position=new Vector2f(200,500);
-
-            RectangleShape rectangulo = new RectangleShape(new SFML.System.Vector2f(100,50));
-            rectangulo.FillColor = Color.Blue;
-            rectangulo.Position = new Vector2f(200, 500);
-            rectangulo.Origin = new Vector2f(50.0f,25.0f);
 
             //Suscribirsee a eventos para registrar acciones
             win.Closed += OnWindowClosed;
@@ -48,34 +40,72 @@ namespace SFML_sample
 
                 //Verificamos si se triggereo algun evento
                 win.DispatchEvents();
-
-                switch (escena) 
+                //INPUT
+                switch (escena)
                 {
                     case Escenas.Menu:
-                        win.Draw((Drawable)menuJuego.Texto);
+                        if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
+                        {
+                            escena = Escenas.Juego;
+
+                        }
                         break;
                     case Escenas.Juego:
-                        win.Draw(circulo);
-                        win.Draw(rectangulo);
+                        if (Keyboard.IsKeyPressed(Keyboard.Key.A))
+                        {
+                            if (figura.Rectangulo.Position.X >= 0.0f + figura.Rectangulo.GetGlobalBounds().Width / 2.0f)
+                            {
+                                figura.Rectangulo.Position += new Vector2f(-100f * time.AsSeconds(), 0.0f);
+                            }
+                        }
+                        if (Keyboard.IsKeyPressed(Keyboard.Key.D))
+                        {
+                            if (figura.Rectangulo.Position.X <= width - figura.Rectangulo.GetGlobalBounds().Width / 2.0f)
+                            {
+                                figura.Rectangulo.Position += new Vector2f(100f * time.AsSeconds(), 0.0f);
+                            }
+                        }
+                        //Movimiento circulo
+                        figura.Circulo.Position += new Vector2f(0.0f, 100f * time.AsSeconds());
+
+                        //Colision
+                        if (figura.Circulo.GetGlobalBounds().Intersects(figura.Rectangulo.GetGlobalBounds()))
+                        {
+                            figura.Circulo.Position += new Vector2f(0.0f, -100f * time.AsSeconds());
+                            //figura.Circulo.Position += new Vector2f(100f * time.AsSeconds(), 0.0f);
+                            while (figura.Circulo.Position.Y == 0.0f - figura.Circulo.GetGlobalBounds().Height / 2.0f)
+                            {
+                                break;
+                            }
+                        }
                         break;
                 }
-                //INPUT
-                //win.Clear(Color.Black);
-               
+                //BORRA LA PANTALLA
+                win.Clear(Color.Black);
+                //DIBUJAR LOS OBJETOS
+                switch (escena)
+                {
+                    case Escenas.Menu:
+                        win.Draw(menuJuego.Texto);
+                        break;
+                    case Escenas.Juego:
+                        win.Draw(figura.Circulo);
+                        win.Draw(figura.Rectangulo);
+                        break;
+                }
                 win.Display();
-            } 
-            
+            }
         }
-        private static void OnWindowClosed(object sender, EventArgs e) 
+        private static void OnWindowClosed(object sender, EventArgs e)
         {
             Window window = (Window)sender;
             window.Close();
         }
-        private static void OnKeyPressed(object sender, KeyEventArgs e) 
+        private static void OnKeyPressed(object sender, KeyEventArgs e)
         {
-            if (e.Code==Keyboard.Key.Escape)
+            if (e.Code == Keyboard.Key.Escape)
             {
-                Window window= (Window)sender;
+                Window window = (Window)sender;
                 window.Close();
             }
         }
