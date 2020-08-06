@@ -55,14 +55,14 @@ namespace SFML_sample
                         {
                             if (figura.Rectangulo.Position.X >= 0.0f + figura.Rectangulo.GetGlobalBounds().Width / 2.0f)
                             {
-                                figura.Rectangulo.Position += new Vector2f(-100f * time.AsSeconds(), 0.0f);
+                                figura.Rectangulo.Position += new Vector2f(-200f * time.AsSeconds(), 0.0f);
                             }
                         }
                         if (Keyboard.IsKeyPressed(Keyboard.Key.D))
                         {
                             if (figura.Rectangulo.Position.X <= width - figura.Rectangulo.GetGlobalBounds().Width / 2.0f)
                             {
-                                figura.Rectangulo.Position += new Vector2f(100f * time.AsSeconds(), 0.0f);
+                                figura.Rectangulo.Position += new Vector2f(200f * time.AsSeconds(), 0.0f);
                             }
                         }
                         //Movimiento circulo
@@ -71,7 +71,7 @@ namespace SFML_sample
                         //Colision
                         if (figura.Circulo.GetGlobalBounds().Intersects(figura.Rectangulo.GetGlobalBounds()))
                         {
-                            figura.Circulo.Position += new Vector2f(0.0f, -100f * time.AsSeconds());
+                            figura.Circulo.Position += new Vector2f(0.0f, -11100f * time.AsSeconds());
                             //figura.Circulo.Position += new Vector2f(100f * time.AsSeconds(), 0.0f);
                             while (figura.Circulo.Position.Y == 0.0f - figura.Circulo.GetGlobalBounds().Height / 2.0f)
                             {
