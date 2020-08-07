@@ -11,17 +11,14 @@ namespace SFML_sample
 {
     class ProgramMain
     {
+        public static uint width = 800;
+        public static uint heigth = 600;
         enum Escenas { Menu, Juego }
         static void Main()
         {
-            const uint width = 800;
-            const uint heigth = 600;
             const string windowTitle = "Test";
 
             Escenas escena = Escenas.Juego;
-
-            MenuJuego menuJuego = new MenuJuego();
-            Figuras figura = new Figuras();
             Clock clock = new Clock();
 
             //Creamos la  ventana,pasando el videomode y el titulo
@@ -43,41 +40,8 @@ namespace SFML_sample
                 //INPUT
                 switch (escena)
                 {
-                    case Escenas.Menu:
-                        if (Keyboard.IsKeyPressed(Keyboard.Key.Enter))
-                        {
-                            escena = Escenas.Juego;
-
-                        }
-                        break;
                     case Escenas.Juego:
-                        if (Keyboard.IsKeyPressed(Keyboard.Key.A))
-                        {
-                            if (figura.Rectangulo.Position.X >= 0.0f + figura.Rectangulo.GetGlobalBounds().Width / 2.0f)
-                            {
-                                figura.Rectangulo.Position += new Vector2f(-200f * time.AsSeconds(), 0.0f);
-                            }
-                        }
-                        if (Keyboard.IsKeyPressed(Keyboard.Key.D))
-                        {
-                            if (figura.Rectangulo.Position.X <= width - figura.Rectangulo.GetGlobalBounds().Width / 2.0f)
-                            {
-                                figura.Rectangulo.Position += new Vector2f(200f * time.AsSeconds(), 0.0f);
-                            }
-                        }
-                        //Movimiento circulo
-                        figura.Circulo.Position += new Vector2f(0.0f, 100f * time.AsSeconds());
 
-                        //Colision
-                        if (figura.Circulo.GetGlobalBounds().Intersects(figura.Rectangulo.GetGlobalBounds()))
-                        {
-                            figura.Circulo.Position += new Vector2f(0.0f, -11100f * time.AsSeconds());
-                            //figura.Circulo.Position += new Vector2f(100f * time.AsSeconds(), 0.0f);
-                            while (figura.Circulo.Position.Y == 0.0f - figura.Circulo.GetGlobalBounds().Height / 2.0f)
-                            {
-                                break;
-                            }
-                        }
                         break;
                 }
                 //BORRA LA PANTALLA
@@ -85,12 +49,8 @@ namespace SFML_sample
                 //DIBUJAR LOS OBJETOS
                 switch (escena)
                 {
-                    case Escenas.Menu:
-                        win.Draw(menuJuego.Texto);
-                        break;
                     case Escenas.Juego:
-                        win.Draw(figura.Circulo);
-                        win.Draw(figura.Rectangulo);
+
                         break;
                 }
                 win.Display();
