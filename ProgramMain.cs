@@ -13,16 +13,16 @@ namespace SFML_sample
     {
         public static uint width = 800;
         public static uint heigth = 600;
-        enum Escenas { Menu, Juego }
         static void Main()
         {
             const string windowTitle = "Test";
 
-            Escenas escena = Escenas.Juego;
             Clock clock = new Clock();
 
-            //Creamos la  ventana,pasando el videomode y el titulo
+            //Creamos un videomode para definir el ancho x alto de nuestra ventana
             VideoMode videoMode = new VideoMode(width, heigth);
+
+            //Creamos la ventana´pasando el videomode y el titulo
             RenderWindow win = new RenderWindow(videoMode, windowTitle);
             win.SetFramerateLimit(60);
 
@@ -30,31 +30,8 @@ namespace SFML_sample
             win.Closed += OnWindowClosed;
             win.KeyPressed += OnKeyPressed;
 
-            //El loop de juego - mientras la ventana este abierta
-            while (win.IsOpen)
-            {
-                Time time = clock.Restart();
-
-                //Verificamos si se triggereo algun evento
-                win.DispatchEvents();
-                //INPUT
-                switch (escena)
-                {
-                    case Escenas.Juego:
-
-                        break;
-                }
-                //BORRA LA PANTALLA
-                win.Clear(Color.Black);
-                //DIBUJAR LOS OBJETOS
-                switch (escena)
-                {
-                    case Escenas.Juego:
-
-                        break;
-                }
-                win.Display();
-            }
+            Juego pong = new Juego("Pong");
+            pong.Run(win,clock);
         }
         private static void OnWindowClosed(object sender, EventArgs e)
         {

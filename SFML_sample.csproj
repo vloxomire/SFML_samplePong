@@ -54,8 +54,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Escenas.cs" />
+    <Compile Include="Barra.cs" />
+    <Compile Include="Colisiones.cs" />
+    <Compile Include="EscenaManager.cs" />
+    <Compile Include="Escena.cs" />
+    <Compile Include="Esfera.cs" />
+    <Compile Include="GameObject.cs" />
     <Compile Include="GamePlay.cs" />
+    <Compile Include="Juego.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="ProgramMain.cs" />
   </ItemGroup>
