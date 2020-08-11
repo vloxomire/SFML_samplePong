@@ -41,5 +41,10 @@ namespace SFML_sample
         {
             return renderer;
         }
+
+        public override FloatRect GetGlobalBounds()
+        {
+            return renderer.GetGlobalBounds();
+        }
     }
 }

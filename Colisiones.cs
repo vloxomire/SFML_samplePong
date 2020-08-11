@@ -11,7 +11,7 @@ namespace SFML_sample
     class Colisiones
     {
         Barra barra;
-        public Colisiones() 
+       /* public Colisiones() 
         {
             barra = new Barra();
         }
@@ -26,6 +26,6 @@ namespace SFML_sample
                 b.Xvel=-b.Xvel;
                 b.Yvel=-b.Yvel;
             }
-        }
+        }*/
     }
 }

@@ -14,6 +14,6 @@ namespace SFML_sample
         public abstract void Update(float deltaTime);
         
         public abstract Sprite GetRenderer();
-        
+        public abstract FloatRect GetGlobalBounds();
     }
 }

@@ -7,12 +7,14 @@ namespace SFML_sample
     class Esfera : GameObject
     {
         Sprite renderer;//SPRITE??REFERENCIAS, QUE ES , Q HACE
-        public float Xvel = 100.0f;//VELOCIDAD EN X
-        public float Yvel = 100.0f;//VEL EN Y
+        public float Xvel = 175.0f;//VELOCIDAD EN X
+        public float Yvel = 175.0f;//VEL EN Y
         float xVel;
         float yVel;
+        float angulo;
         public Esfera()
         {
+            //angulo +=5f;
             this.xVel = Xvel;
             this.yVel = Yvel;
             Texture tex = new Texture("Sprite/craneo.png");
@@ -24,12 +26,12 @@ namespace SFML_sample
         }
         public override void Update(float deltaTime)
         {
-            renderer.Rotation += 5;//ERROR CAMINA POR LA PARED, CON EL GIRO
+            renderer.Rotation = angulo;//ERROR CAMINA POR LA PARED, CON EL GIRO
             if (renderer.Position.X > ProgramMain.width - renderer.GetGlobalBounds().Width / 2.0f || renderer.Position.X < 0.0f + renderer.GetGlobalBounds().Width / 2.0f)
             {
                 xVel = -xVel;
             }
-            if (renderer.Position.Y > ProgramMain.heigth - renderer.GetGlobalBounds().Height / 2.0f || renderer.Position.Y < 0.0f + renderer.GetGlobalBounds().Height / 2.0f)
+            if (renderer.Position.Y > ProgramMain.heigth - renderer.GetGlobalBounds().Height / 2.0f||renderer.Position.Y < 0.0f + renderer.GetGlobalBounds().Height / 2.0f)
             {
                 yVel = -yVel;
             }
@@ -39,5 +41,14 @@ namespace SFML_sample
         {
             return renderer;
         }
+
+        public override FloatRect GetGlobalBounds()
+        {
+            return renderer.GetGlobalBounds();
+        }
+        public void OnPaddleCollision()
+        {
+            yVel = -yVel;
+        }  
     }
 }
