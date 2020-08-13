@@ -6,49 +6,40 @@ namespace SFML_sample
 {
     class Esfera : GameObject
     {
-        Sprite renderer;//SPRITE??REFERENCIAS, QUE ES , Q HACE
-        public float Xvel = 175.0f;//VELOCIDAD EN X
-        public float Yvel = 175.0f;//VEL EN Y
-        float xVel;
-        float yVel;
-        float angulo;
-        public Esfera()
+        float velX = 175.0f;//VELOCIDAD EN X
+        float velY = 175.0f;//VEL EN Y
+  
+        public Esfera(Texture tex,float x,float y):base(tex,x,y)
         {
-            //angulo +=5f;
-            this.xVel = Xvel;
-            this.yVel = Yvel;
-            Texture tex = new Texture("Sprite/craneo.png");
-            renderer = new Sprite(tex);
             //renderer.Scale *=2.0f;
             renderer.Scale = new Vector2f(0.08f, 0.08f);
             renderer.Origin = new Vector2f(330.0f, 413.0f);//PROPIEDADES-DETALLE-LA MITAD DEL VALOR
-            renderer.Position = new Vector2f(500, 100);
         }
         public override void Update(float deltaTime)
         {
-            renderer.Rotation = angulo;//ERROR CAMINA POR LA PARED, CON EL GIRO
             if (renderer.Position.X > ProgramMain.width - renderer.GetGlobalBounds().Width / 2.0f || renderer.Position.X < 0.0f + renderer.GetGlobalBounds().Width / 2.0f)
             {
-                xVel = -xVel;
+                velX = -velX;
             }
             if (renderer.Position.Y > ProgramMain.heigth - renderer.GetGlobalBounds().Height / 2.0f||renderer.Position.Y < 0.0f + renderer.GetGlobalBounds().Height / 2.0f)
             {
-                yVel = -yVel;
+                velY = -velY;
             }
-            renderer.Position += new Vector2f(xVel, yVel) * deltaTime;
+            renderer.Position += new Vector2f(velX, velY) * deltaTime;
         }
-        public override Sprite GetRenderer()
+        public void OnPaddleCollision(COLLISION_DIRECTION dir)
         {
-            return renderer;
-        }
-
-        public override FloatRect GetGlobalBounds()
-        {
-            return renderer.GetGlobalBounds();
-        }
-        public void OnPaddleCollision()
-        {
-            yVel = -yVel;
+            switch (dir)
+            {
+                case COLLISION_DIRECTION.LEFT:
+                case COLLISION_DIRECTION.RIGHT:
+                    velX = -velX;
+                    break;
+                case COLLISION_DIRECTION.TOP:
+                case COLLISION_DIRECTION.BOT:
+                    velY = -velY;
+                    break;
+            }
         }  
     }
 }

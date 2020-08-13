@@ -1,6 +1,7 @@
 ﻿using SFML.Graphics;
 using SFML.Window;
 using SFML.System;
+using SFML.Audio;
 using System;
 
 
@@ -26,6 +27,7 @@ namespace SFML_sample
             menuLbl.Position = new Vector2f(ProgramMain.width/2.0f,ProgramMain.heigth/2.0f);
             menuLbl.FillColor = Color.Green;
             menuLbl.Scale = new Vector2f(0.6f, 1.5f);
+            
         }
         public override void Update(float deltaTiempo)
         {

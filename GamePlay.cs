@@ -2,6 +2,7 @@
 using System;
 using SFML.System;
 using SFML.Window;
+using SFML.Audio;
 
 namespace SFML_sample
 {
@@ -10,31 +11,38 @@ namespace SFML_sample
         Esfera esfera;
         Sprite background;//FONDO
         Barra player;
-        Text labelVida,avizo;
+        Text labelVida, avizo;
         float angulo;
         //public Text Avizo;
         Font fuente;
         string msj;
         public int Vida;
-        public GamePlay() 
+
+        COLLISION_DIRECTION collisionDir;
+        public GamePlay()
         {
             Vida = 3;
             angulo = 45.0f;
             msj = "Toco fondo";
             fuente = new Font("Font/Resitta.ttf");
-            labelVida = new Text("Vida:"+Vida, fuente);
+            labelVida = new Text("Vida:" + Vida, fuente);
             labelVida.Scale = new Vector2f(2.0f, 2.0f);
             labelVida.Position = new Vector2f(2.0f, 2.0f);
             labelVida.FillColor = Color.Red;
 
-            avizo = new Text("dkdk",fuente);
+            avizo = new Text("dkdk", fuente);
             avizo.Scale = new Vector2f(2.0f, 2.0f);
-            avizo.Position = new Vector2f(ProgramMain.width/2, ProgramMain.heigth/2);
+            avizo.Position = new Vector2f(ProgramMain.width / 2, ProgramMain.heigth / 2);
             avizo.FillColor = Color.Red;
             avizo.Scale = new Vector2f(2.0f, 2.0f);
 
-            player = new Barra();
-            esfera = new Esfera();
+            player = new Barra(new Texture("Sprite/barra.png"), 200, 500);
+            esfera = new Esfera(new Texture("Sprite/craneo.png"), 500, 100);
+
+            
+            /*var buffer = new SoundBuffer("music/canary.ogg");
+            var sonido = new Sound(buffer);
+            sonido.Play();*/
         }
         public override void Draw(RenderWindow ventana)//DIBUJA
         {
@@ -47,7 +55,7 @@ namespace SFML_sample
 
         public override void Init()//constructor viene a cumplir la funcion del constructor
         {
-            
+
 
             Texture textura;
             textura = new Texture("Sprite/arbol.png");
@@ -57,22 +65,24 @@ namespace SFML_sample
 
         public override void Update(float deltaTime)
         {
-            if (player.GetGlobalBounds().Intersects(esfera.GetGlobalBounds())) 
-            {
-                esfera.OnPaddleCollision();
-            }
             player.Update(deltaTime);
+
+            if (CollisionUtils.CheckCollision(player.GetRenderer(), esfera.GetRenderer(), ref collisionDir))
+            {
+                esfera.OnPaddleCollision(collisionDir);
+            }
+
             TocaFondo();
+
             esfera.Update(deltaTime);
         }
         public void TocaFondo()
         {
-            if (esfera.GetRenderer().Position.Y >= ProgramMain.heigth - esfera.GetGlobalBounds().Width/1.7 )
+            if (esfera.GetRenderer().Position.Y >= ProgramMain.heigth - esfera.GetGlobalBounds().Width / 1.70f)
             {
                 //Problema a veces detecta los bound otras no???
                 Vida -= 1;
                 labelVida.DisplayedString = "Vida:" + Vida;//Cambia texto
-                esfera.GetRenderer().Rotation = -angulo;
                 avizo.DisplayedString = "Toco fondo";
             }
         }

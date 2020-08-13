@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using SFML.Audio;
 
 namespace SFML_sample
 {
@@ -17,7 +18,8 @@ namespace SFML_sample
             window.SetTitle(gameName);
             //PARA QUE INICIALIZE
             EscenaManager.LoadEscena(new Menu());
-
+            Sonido.PlaySonido();
+            
             //El loop de juego - mientras la ventana este abierta
             while (window.IsOpen)
             {

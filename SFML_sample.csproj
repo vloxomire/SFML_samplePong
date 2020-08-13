@@ -55,7 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Barra.cs" />
-    <Compile Include="Colisiones.cs" />
+    <Compile Include="CollisionUtils.cs" />
     <Compile Include="EscenaManager.cs" />
     <Compile Include="Escena.cs" />
     <Compile Include="Esfera.cs" />
@@ -64,6 +64,7 @@
     <Compile Include="Juego.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="ProgramMain.cs" />
+    <Compile Include="Sonido.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

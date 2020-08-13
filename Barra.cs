@@ -7,14 +7,9 @@ namespace SFML_sample
 {
     class Barra:GameObject
     {
-        Sprite renderer;
-        float barraVelocidad = 300.0f;
-        public Barra() 
+        float velX = 300.0f;
+        public Barra(Texture tex,float x, float y) :base(tex,x,y)
         {
-            Texture tex = new Texture("Sprite/barra.png");
-            renderer = new Sprite(tex);
-
-            renderer.Position = new Vector2f(200,500);
             renderer.Origin = new Vector2f(321.0f, 85.0f);//643x171
             renderer.Scale = new Vector2f(0.30f,0.30f);
         }
@@ -24,7 +19,7 @@ namespace SFML_sample
             {
                 if (renderer.Position.X >= 0.0f + renderer.GetGlobalBounds().Width / 2.0f)
                 {
-                    renderer.Position += new Vector2f(-barraVelocidad * deltaTime, 0.0f);
+                    renderer.Position += new Vector2f(-velX * deltaTime, 0.0f);
                     //background.Position += new Vector2f(+30 * deltaTime, 0.0f);//Mover el fondo con el player
                 }
             }
@@ -32,19 +27,10 @@ namespace SFML_sample
             {
                 if (renderer.Position.X <= ProgramMain.width - renderer.GetGlobalBounds().Width / 2.0f)
                 {
-                    renderer.Position += new Vector2f(barraVelocidad * deltaTime, 0.0f);
+                    renderer.Position += new Vector2f(velX * deltaTime, 0.0f);
                     //background.Position += new Vector2f(-30 * deltaTime, 0.0f);
                 }
             }
-        }
-        public override Sprite GetRenderer()
-        {
-            return renderer;
-        }
-
-        public override FloatRect GetGlobalBounds()
-        {
-            return renderer.GetGlobalBounds();
         }
     }
 }
