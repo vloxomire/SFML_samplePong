@@ -12,6 +12,7 @@ namespace SFML_sample
     abstract class GameObject
     {
         protected Sprite renderer;
+        private bool active = true;
         public GameObject(Texture tex) 
         {
             renderer=new Sprite(tex);
@@ -29,6 +30,10 @@ namespace SFML_sample
         public FloatRect GetGlobalBounds() 
         {
             return renderer.GetGlobalBounds();
+        }
+        public bool IsActive() 
+        {
+            return active;
         }
     }
 }

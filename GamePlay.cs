@@ -75,6 +75,11 @@ namespace SFML_sample
             TocaFondo();
 
             esfera.Update(deltaTime);
+
+            if (Keyboard.IsKeyPressed(Keyboard.Key.P)) 
+            {
+                EscenaManager.LoadEscena(new Pausa());
+            }
         }
         public void TocaFondo()
         {

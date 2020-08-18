@@ -27,7 +27,9 @@ namespace SFML_sample
             menuLbl.Position = new Vector2f(ProgramMain.width/2.0f,ProgramMain.heigth/2.0f);
             menuLbl.FillColor = Color.Green;
             menuLbl.Scale = new Vector2f(0.6f, 1.5f);
-            
+
+            //Musica
+            Sonido.PlayMusica();
         }
         public override void Update(float deltaTiempo)
         {

@@ -62,7 +62,9 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="GamePlay.cs" />
     <Compile Include="Juego.cs" />
+    <Compile Include="JuegoFinalizado.cs" />
     <Compile Include="Menu.cs" />
+    <Compile Include="Pausa.cs" />
     <Compile Include="ProgramMain.cs" />
     <Compile Include="Sonido.cs" />
   </ItemGroup>

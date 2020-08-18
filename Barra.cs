@@ -2,6 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
+using SFML.Audio;
 
 namespace SFML_sample
 {
@@ -10,8 +11,9 @@ namespace SFML_sample
         float velX = 300.0f;
         public Barra(Texture tex,float x, float y) :base(tex,x,y)
         {
-            renderer.Origin = new Vector2f(321.0f, 85.0f);//643x171
-            renderer.Scale = new Vector2f(0.30f,0.30f);
+            //renderer.Origin = new Vector2f(renderer.GetGlobalBounds().Height /2 ,renderer.GetGlobalBounds().Width /2);//104x24
+            renderer.Origin = new Vector2f(104.0f/2 , 24.0f/2);//104x24
+            //renderer.Scale = new Vector2f(0.30f,0.30f);
         }
         public override void Update(float deltaTime)
         {

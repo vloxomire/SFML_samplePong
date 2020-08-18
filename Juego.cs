@@ -17,8 +17,8 @@ namespace SFML_sample
         {
             window.SetTitle(gameName);
             //PARA QUE INICIALIZE
-            EscenaManager.LoadEscena(new Menu());
-            Sonido.PlaySonido();
+            EscenaManager.LoadEscena(new Menu());//Carga la escena Menu
+            //Sonido.PlaySonido();
             
             //El loop de juego - mientras la ventana este abierta
             while (window.IsOpen)
